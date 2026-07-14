@@ -26,6 +26,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/keymap.h>
 #include <zmk/wpm.h>
 
+#define NICEVIEW_PROFILE_COUNT 2
+
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 struct output_status_state {
@@ -144,11 +146,11 @@ static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
 
     // Draw circles
-    int circle_offsets[NICEVIEW_PROFILE_COUNT][2] = {
+    int circle_offsets[2][2] = {
         {13, 13}, {55, 13},
     };
 
-    for (int i = 0; i < NICEVIEW_PROFILE_COUNT; i++) {
+    for (int i = 0; i < 2; i++) {
         bool selected = i == state->active_profile_index;
 
         if (state->profiles_connected[i]) {
